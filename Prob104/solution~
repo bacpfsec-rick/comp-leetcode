@@ -1,0 +1,79 @@
+/**
+ * C++ solution
+ */
+/**
+ * Definition for binary tree
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    int maxDepth(TreeNode *root) {
+        if ( root == 0 ) {
+            return 0;
+        } else {
+            int leftDepth = maxDepth(root->left);
+            int rightDepth = maxDepth(root->right);
+            return ( (leftDepth>rightDepth) ? (leftDepth+1) : (rightDepth+1) );
+        }
+    }
+};
+
+
+
+
+
+/**
+ * Python solution
+ */
+# Definition for a  binary tree node
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
+class Solution:
+    # @param root, a tree node
+    # @return an integer
+    def maxDepth(self, root):
+        if (root is None):
+            return 0
+        leftDepth = self.maxDepth(root.left)
+        rightDepth = self.maxDepth(root.right)
+        if (leftDepth > rightDepth):
+            return leftDepth+1
+        else:
+            return rightDepth+1
+        
+
+		
+		
+
+/**
+ * Java solution
+ */
+ /**
+ * Definition for binary tree
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+public class Solution {
+    public int maxDepth(TreeNode root) {
+        if (root == null) {
+            return 0;
+        } else {
+            int leftDepth = maxDepth(root.left);
+            int rightDepth = maxDepth(root.right);
+            return ( (leftDepth>rightDepth) ? (leftDepth+1) : (rightDepth+1) );
+        }
+    }
+}
