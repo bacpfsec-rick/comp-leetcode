@@ -1,0 +1,121 @@
+/**
+ * C++ solution 1 based on property of XOR
+ * running time: O(n), literally n
+ */
+class Solution {
+public:
+    int singleNumber(int A[], int n) {
+        // Base cases
+        if(n<=0) return -1; 
+        if(n==1) return A[0]; 
+
+        // Using XOR
+        int result = 0;
+        for (int i = 0; i < n; i ++) {
+            result = result ^ A[i];
+        }
+        return result;
+    }
+};
+
+
+/**
+ * C++ solution 2 based on hash map
+ * running time: O(n), literally 2*n
+ */
+class Solution {
+public:
+    int singleNumber(int A[], int n) {
+        // Base cases
+        if(n<=0) return -1; 
+        if(n==1) return A[0]; 
+        
+        // Use hashmap
+        std::map<int, int> m;
+        for (int i=0; i<n; ++i) {
+            if (m.find(A[i]) != m.end()) {
+                m[A[i]]=0;  // set value of old key to 0                
+            } else {
+                m[A[i]]=1;  // set value of new key to 1
+            }
+        }
+        for (int i=0; i<n; ++i) {
+            if (m[A[i]]==1) {
+                return A[i];
+            }
+        }
+    }
+};
+
+
+
+
+
+/**
+ * Python solution 1 based on XOR
+ */
+class Solution:
+    # @param A, a list of integer
+    # @return an integer
+    def singleNumber(self, A):
+        result = 0
+        for i in range(len(A)):
+            result = result ^ A[i]
+        return result
+		
+		
+/**
+ * Python solution 2 based on Map
+ */
+class Solution:
+    # @param A, a list of integer
+    # @return an integer
+    def singleNumber(self, A):
+        map = dict([(v,0) for v in A])
+        for i in range(len(A)):
+            #if map[A[i]] == 0:
+            #    map[A[i]] = 1
+            #if map[A[i]] == 1:
+            #    map[A[i]] = 0
+            map[A[i]] = 1-map[A[i]]
+        for i in range(len(A)):
+            if map[A[i]] == 1:
+                return A[i]
+        
+
+		
+		
+
+/**
+ * Java solution 1 based on XOR
+ */
+public class Solution {
+    public int singleNumber(int[] A) {
+        int result = 0;
+        for (int i : A) {
+            result ^= i;
+        }
+        return result;
+    }
+}
+
+
+
+/**
+ * Java solution 2 based on Set
+ * Time limit exceed
+ */
+public class Solution {
+    public int singleNumber(int[] A) {
+        HashSet<Integer> set = new HashSet<Integer>();
+        for (int i : A) {
+            if (set.contains(i)) {
+                set.remove(i);
+            } else {
+                set.add(i);
+            }
+        }
+        Iterator<Integer> iterator = set.iterator();
+        return iterator.next();
+    }
+}

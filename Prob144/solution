@@ -1,0 +1,125 @@
+/**
+ * C++ solution 1 based on recursion
+ */
+/**
+ * Definition for binary tree
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    vector<int> preorderTraversal(TreeNode *root) {
+        vector<int> pre;
+        if (root==NULL) {
+            return pre;
+        }
+        vector<int> leftPre(preorderTraversal(root->left));
+        vector<int> rightPre(preorderTraversal(root->right));
+        pre.reserve(1+leftPre.size()+rightPre.size());
+        pre.push_back(root->val);
+        pre.insert(pre.end(),leftPre.begin(),leftPre.end());
+        pre.insert(pre.end(),rightPre.begin(),rightPre.end());
+        return pre;
+    }
+};
+
+
+/**
+ * C++ solution 2 based on stack and non-recursion
+ */
+/**
+ * Definition for binary tree
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    vector<int> preorderTraversal(TreeNode *root) {
+        vector<int> pre;
+        stack<TreeNode*> s;
+        if (root) {
+            s.push(root);
+        }
+        while (!s.empty()) {
+            TreeNode* curr = s.top();
+            s.pop();
+            if (curr!=NULL) {
+                pre.push_back(curr->val);
+                s.push(curr->right);
+                s.push(curr->left);
+            }
+        }
+        return pre;
+    }
+};
+
+
+
+
+
+/**
+ * Python solution based on stack and non-recursion
+ */
+# Definition for a  binary tree node
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
+class Solution:
+    # @param root, a tree node
+    # @return a list of integers
+    def preorderTraversal(self, root):
+        pre = []
+        nodes = []
+        nodes.append(root);
+        while (len(nodes) is not 0) :
+            curr = nodes.pop()
+            if (curr is not None) :
+                pre.append(curr.val)
+                nodes.append(curr.right)
+                nodes.append(curr.left)
+        return pre
+		
+    
+
+		
+		
+
+/**
+ * Java solution
+ */
+/**
+ * Definition for binary tree
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+public class Solution {
+    public List<Integer> preorderTraversal(TreeNode root) {
+        List<Integer> pre = new ArrayList<Integer>();
+        Stack<TreeNode> nodes = new Stack<TreeNode>();
+        nodes.push(root);
+        while (nodes.size() != 0) {
+            TreeNode curr = nodes.pop();
+            if (curr!=null) {
+                pre.add(curr.val);
+                nodes.push(curr.right);
+                nodes.push(curr.left);
+            }
+        }
+        return pre;
+    }
+}

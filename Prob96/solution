@@ -1,0 +1,61 @@
+/**
+ * C++ solution
+ * Trick: BST has the property that left-child < root < right-child
+ *        then this is a combinatoric problem with DP
+ * Running time: O(n^2)
+ */
+class Solution {
+public:
+    int numTrees(int n) {
+        vector<int> comb(n+1,0);
+        comb[0] = 1; // empty tree
+        comb[1] = 1;
+        for (int i = 2; i<=n; i++ ) {
+            /* Sum up the combinations by DP*/
+            for(int j =0; j<i; j++)  {
+                     comb[i] += comb[j]*comb[i-j-1];
+            }   
+        }
+        return comb[n];
+    }
+};
+
+
+
+
+
+/**
+ * Python solution
+ */
+class Solution:
+    # @return an integer
+    def numTrees(self, n):
+        comb = [0 for i in range(n+1)]
+        comb[0] = 1
+        comb[1] = 1
+        for i in range(2,n+1) :
+            for j in range(0,i) :
+                comb[i] += comb[j]*comb[i-j-1]
+        return comb[n]
+		
+    
+
+		
+		
+
+/**
+ * Java solution
+ */
+public class Solution {
+    public int numTrees(int n) {
+        int[] comb = new int[n+1];
+        comb[0] = 1;
+        comb[1] = 1;
+        for (int i=2; i<=n; i++) {
+            for (int j=0; j<i; ++j) {
+                comb[i] += comb[j]*comb[i-j-1];
+            }
+        }
+        return comb[n];
+    }
+}

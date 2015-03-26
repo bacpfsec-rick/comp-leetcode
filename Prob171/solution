@@ -1,0 +1,53 @@
+/**
+ * C++ solution
+ * Trick: Using multiplication-addition strategy
+ * Running time: O(n)
+ */
+class Solution {
+public:
+    int titleToNumber(string s) {
+        // Using multiplication-addition strategy
+        int result = 0;
+        for ( int i=0; i<s.length(); i++) {
+            result *= 26;
+            result += ( (int)s[i] - 64); // A is 65 in ASCII
+        }
+        return result;
+    }
+};
+
+
+
+
+
+/**
+ * Python solution
+ */
+class Solution:
+    # @param s, a string
+    # @return an integer
+    def titleToNumber(self, s):
+        result = 0
+        for i in range(0,len(s)):
+            result *= 26;
+            result += (ord(s[i])-64)
+        return result
+		
+    
+
+		
+		
+
+/**
+ * Java solution
+ */
+public class Solution {
+    public int titleToNumber(String s) {
+        int result = 0;
+        for ( int i=0; i<s.length(); i++) {
+            result *= 26;
+            result += ( (int)(s.charAt(i)) - 64); // A is 65 in ASCII
+        }
+        return result;
+    }
+}
