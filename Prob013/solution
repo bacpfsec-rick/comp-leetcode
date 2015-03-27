@@ -1,0 +1,135 @@
+/**
+ * C++ solution 
+ */
+class Solution {
+public:
+    int value(char c) {
+        switch(c) {
+            case 'I':
+                return 1;
+            case 'V':
+                return 5;
+            case 'X':
+                return 10;
+            case 'L':
+                return 50;
+            case 'C':
+                return 100;
+            case 'D':
+                return 500;
+            case 'M':
+                return 1000;
+            default:
+                return 0;
+        }
+    }
+    
+    int romanToInt(string s) {
+        if (s.size()==0) {
+            return 0;
+        }
+        int result = 0, curr = value(s[0]), next;
+        for (int i=0; i<s.size()-1; ++i) {
+            next = value(s[i+1]);
+            if (next>curr) {
+                result -= curr;
+            } else {
+                result += curr;
+            }
+            curr = next;
+        }
+        result += value(s[s.size()-1]);
+        return result;
+    }
+};
+
+
+
+
+
+/**
+ * Python solution
+ */
+class Solution:
+    # @return an integer
+    def value(self, s):
+        if s == "I":
+            return 1
+        if s == "V":
+            return 5
+        if s == "X":
+            return 10
+        if s == "L":
+            return 50
+        if s == "C":
+            return 100
+        if s == "D":
+            return 500
+        if s == "M":
+            return 1000
+        return 0
+        
+    def romanToInt(self, s):
+        result = 0
+        if (s == ""):
+            return result
+        curr = self.value(s[0])
+        after = 0
+        for i in range(len(s)-1):
+            after = self.value(s[i+1])
+            if (after>curr):
+                result -= curr
+            else:
+                result += curr
+            curr = after
+        result += self.value(s[-1:])
+        return result
+		
+    
+
+		
+		
+/**
+ * Java solution
+ */
+public class Solution {
+    public int value(char c) {
+        switch(c) {
+            case 'I':
+                return 1;
+            case 'V':
+                return 5;
+            case 'X':
+                return 10;
+            case 'L':
+                return 50;
+            case 'C':
+                return 100;
+            case 'D':
+                return 500;
+            case 'M':
+                return 1000;
+            default:
+                return 0;
+        }
+    }
+    
+    public int romanToInt(String s) {
+        int result =0;
+        if (s.length()==0) {
+            return result;
+        }
+        int curr = value(s.charAt(0)), next;
+        for (int i=0; i<s.length()-1; i++) {
+            next = value(s.charAt(i+1));
+            if (next>curr) {
+                result -= curr;
+            } else {
+                result += curr;
+            }
+            curr = next;
+        }
+        result += value(s.charAt(s.length()-1));
+        return result;
+    }
+}

@@ -1,0 +1,171 @@
+/**
+ * C++ solution 1 based linking children of each given level
+ */
+/**
+ * Definition for binary tree with next pointer.
+ * struct TreeLinkNode {
+ *  int val;
+ *  TreeLinkNode *left, *right, *next;
+ *  TreeLinkNode(int x) : val(x), left(NULL), right(NULL), next(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    void connect(TreeLinkNode *root) {
+        queue<TreeLinkNode*> q;
+        // empty tree
+        if (root!=NULL) {
+            q.push(root);
+        } else {
+            return;
+        }
+        // general case
+        while (!q.empty()) {
+            int numOfCurrentLevel = q.size();
+            TreeLinkNode* curr;
+            for (int i=0; i<numOfCurrentLevel; i++) {
+                curr = q.front();
+                q.pop();
+                if (curr->left!=NULL ) {
+                    q.push(curr->left);
+                    curr->left->next = curr->right;
+                    if (curr->right!=NULL) {
+                        q.push(curr->right);
+                        if (i!=q.size()-1) {
+                            curr->right->next = q.front()->left;
+                        }
+                    }
+                }
+            }
+            curr->next = NULL; // End of a level
+        }
+    }
+};
+
+
+
+/**
+ * C++ solution 2 based linking each level
+ */
+/**
+ * Definition for binary tree with next pointer.
+ * struct TreeLinkNode {
+ *  int val;
+ *  TreeLinkNode *left, *right, *next;
+ *  TreeLinkNode(int x) : val(x), left(NULL), right(NULL), next(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    void connect(TreeLinkNode *root) {
+        queue<TreeLinkNode*> q;
+        // empty tree
+        if (root!=NULL) {
+            q.push(root);
+        } else {
+            return;
+        }
+        // general case
+        while (!q.empty()) {
+            TreeLinkNode* curr = NULL;
+            int size = q.size();
+            for (int i=0; i<size; i++) {
+                curr = q.front();
+                q.pop();
+                if (i!=size-1) {
+                    curr->next = q.front();
+                }
+                if (curr->left != NULL) {
+                    q.push(curr->left);
+                }
+                if (curr->right != NULL) {
+                    q.push(curr->right);
+                }
+            }
+            curr->next = NULL; // End of a level
+        }
+    }
+};
+
+
+
+
+
+
+/**
+ * Python solution similar to C++ solution 1
+ */
+# Definition for binary tree with next pointer.
+# class TreeLinkNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+#         self.next = None
+class Solution:
+    # @param root, a tree link node
+    # @return nothing
+    def connect(self, root):
+        queue = []
+        if (root is None):
+            return
+        else:
+            queue.append(root)
+        while (len(queue) is not 0):
+            size = len(queue)
+            curr = root
+            for i in range(size):
+                curr = queue[0]
+                queue.pop(0)
+                if (curr.left is not None):
+                    queue.append(curr.left)
+                    curr.left.next = curr.right
+                    if (curr.right is not None):
+                        queue.append(curr.right)
+                        if (i is not (size-1)):
+                            curr.right.next = queue[0].left
+            curr.next = None
+		
+    
+
+		
+		
+
+/**
+ * Java solution similar to C++ solution 1
+ */
+/**
+ * Definition for binary tree with next pointer.
+ * public class TreeLinkNode {
+ *     int val;
+ *     TreeLinkNode left, right, next;
+ *     TreeLinkNode(int x) { val = x; }
+ * }
+ */
+public class Solution {
+    public void connect(TreeLinkNode root) {
+        if (root == null) {
+            return;
+        }
+        Queue<TreeLinkNode> q = new ArrayDeque<TreeLinkNode>();
+        q.add(root);
+        while (!q.isEmpty()) {
+            TreeLinkNode curr = null;
+            int size = q.size();
+            for (int i=0; i<size; i++) {
+                curr = q.remove();
+                if (curr.left!=null) {
+                    q.add(curr.left);
+                    curr.left.next = curr.right;
+                    if (curr.right!=null) {
+                        q.add(curr.right);
+                        if (i!=size-1) {
+                            curr.right.next = q.peek().left;
+                        }
+                    }
+                }
+            }
+            curr.next = null;
+        }
+    }
+}
