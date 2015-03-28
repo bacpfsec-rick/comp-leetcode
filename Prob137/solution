@@ -1,0 +1,70 @@
+/**
+ * C++ solution 1 based on hash
+ * Running time: O(n), actually < 2n
+ */
+class Solution {
+public:
+    int singleNumber(int A[], int n) {
+        map<int,int> m;
+        for (int i=0; i<n; i++) {
+            if (m[A[i]]==0) {
+                m[A[i]]=1;
+            } else {
+                m[A[i]]++;
+            }
+        }
+        for (map<int,int>::const_iterator it=m.begin(); it!=m.end(); ++it) {
+            if (it->second==1) {
+                return it->first;
+            }
+        }
+    }
+};
+
+
+
+
+
+/**	
+ * Python solution
+ */
+class Solution:
+    # @param A, a list of integer
+    # @return an integer
+    def singleNumber(self, A):
+        di = {}
+        for i in A:
+            if di.has_key(i):
+                di[i] += 1
+            else:
+                di[i] = 1
+        for i in di:
+            if di[i] is 1:
+                return i
+		
+    
+
+		
+		
+
+/**
+ * Java solution
+ */
+public class Solution {
+    public int singleNumber(int[] A) {
+        HashMap<Integer,Integer> hm = new HashMap<Integer,Integer>();
+        for (int i=0; i<A.length; ++i) {
+            if (hm.containsKey(A[i])) {
+                hm.put(A[i],hm.get(A[i])+1);
+            } else {
+                hm.put(A[i],1);
+            }
+        }
+        for (Integer key : hm.keySet()) {
+            if (hm.get(key)==1) {
+                return key;
+            }
+        }
+        return 0;
+    }
+}
