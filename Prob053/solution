@@ -1,0 +1,68 @@
+/**
+ * C++ solution based on Jay Kadane algorithm with O(n) running time
+ * Running time: O(n)
+ */
+class Solution {
+public:
+    int maxSubArray(int A[], int n) {
+        int cur = A[0];
+        int max = cur;
+        for (int i = 1; i < n; i++) {
+            if (cur > 0) { // check all possible postive sum
+                cur += A[i];
+            } else {
+                cur = A[i];
+            }
+            if (cur > max) { // record the global max from local max
+                max = cur;
+            }
+        }
+        return max;
+    }
+};
+
+
+
+
+
+/**
+ * Python solution
+ */
+class Solution:
+    # @param A, a list of integers
+    # @return an integer
+    def maxSubArray(self, A):
+        curr = A[0]
+        maxSum = curr
+        for i in range(1,len(A)):
+            if (curr>0):
+                curr += A[i]
+            else:
+                curr = A[i]
+            if (curr>maxSum):
+                maxSum = curr
+        return maxSum
+		
+    
+
+		
+		
+
+/**
+ * Java solution
+ */
+public class Solution {
+    public int maxSubArray(int[] A) {
+        int curr = A[0];
+        int max = curr;
+        for (int i=1; i<A.length; i++) {
+            if (curr>0) {
+                curr += A[i];
+            } else {
+                curr = A[i];
+            }
+            max = (curr>max) ? curr : max;
+        }
+        return max;
+    }
+}

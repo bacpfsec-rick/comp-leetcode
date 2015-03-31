@@ -1,0 +1,64 @@
+/**
+ * C++ solution
+ * Running time: O(n)
+ */
+class Solution {
+public:
+    int removeElement(int A[], int n, int elem) {
+        int length = n, curPos = 0;
+        for (int i=0; i<n; i++) {
+            if (A[i]==elem) {
+                length--;
+            } else {
+                A[curPos] = A[i];
+                curPos++;
+            }
+        }
+        return length;
+    }
+};
+
+
+
+
+
+/**
+ * Python solution
+ */
+class Solution:
+    # @param    A       a list of integers
+    # @param    elem    an integer, value need to be removed
+    # @return an integer
+    def removeElement(self, A, elem):
+        length = len(A)
+        curPos = 0;
+        for i in range(len(A)):
+            if (A[i]==elem):
+                length -= 1
+            else:
+                A[curPos] = A[i]
+                curPos += 1
+        return length
+		
+    
+
+		
+		
+
+/**
+ * Java solution
+ */
+public class Solution {
+    public int removeElement(int[] A, int elem) {
+        int length = A.length, curPos = 0;
+        for (int i=0; i<A.length; i++) {
+            if (A[i]==elem) {
+                length--;
+            } else {
+                A[curPos] = A[i];
+                curPos++;
+            }
+        }
+        return length;
+    }
+}

@@ -1,0 +1,88 @@
+/**
+ * C++ solution
+ * Analysis:
+ * Calculate all the local maximum diff. to get the global maximum diff.
+ * If the ith price is lower than buy price, then reset both buy and sell
+ * Running time: O(n)
+ * Space: O(1)
+ */
+class Solution {
+public:
+    int maxProfit(vector<int> &prices) {
+        if (prices.size()==0) {
+            return 0;
+        }
+        int buy = prices[0], sell = prices[0], max = 0, diff;
+        for (int i=0; i<prices.size(); i++) {
+            if (prices[i]<buy) { // reset and consider next period
+                buy = prices[i];
+                sell = buy;
+            } else if (prices[i]>sell) {
+                sell = prices[i];
+                diff = sell-buy;
+                if (diff>max) {
+                    max = diff;
+                }
+            }
+        }
+        return max;
+    }
+};
+
+
+
+
+
+/**
+ * Python solution
+ */
+class Solution:
+    # @param prices, a list of integer
+    # @return an integer
+    def maxProfit(self, prices):
+        if (len(prices)==0):
+            return 0
+        buy = prices[0]
+        sell = buy
+        diff = 0
+        profit = 0
+        for i in range(len(prices)):
+            if (prices[i]<buy):
+                buy = prices[i]
+                sell = buy
+            if (prices[i]>sell):
+                sell = prices[i]
+                diff = sell-buy
+                if (diff>profit):
+                    profit = diff
+        return profit
+		
+    
+
+		
+		
+
+/**
+ * Java solution
+ */
+public class Solution {
+    public int maxProfit(int[] prices) {
+        if (prices.length==0) {
+            return 0;
+        }
+        int buy=prices[0], sell = buy, max = 0, diff = 0;
+        for (int i=0; i<prices.length; i++) {
+            if (prices[i]<buy) {
+                buy = prices[i];
+                sell = buy;
+            } else if (prices[i]>sell) {
+                sell = prices[i];
+                diff = sell-buy;
+                if (diff>max) {
+                    max = diff;
+                }
+            }
+        }
+        return max;
+    }
+}

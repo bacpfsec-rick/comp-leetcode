@@ -1,0 +1,144 @@
+/**
+ * C++ solution 1 based on hash
+ * Running time: O(n), extra space O(n)
+ */
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode(int x) : val(x), next(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    ListNode *detectCycle(ListNode *head) {
+        map<ListNode*,int> m;
+        while (true) {
+            if (head==NULL) {
+                return NULL;
+            }
+            if (m[head]==0) {
+                m[head]=1;
+            } else if (m[head]==1) {
+                return head;
+            }
+            head = head->next;
+        }
+    }
+};
+
+
+
+/**
+ * C++ solution 2 pointer racing
+ * Analysis: Denote following variables
+ * x : length of non-cycle part
+ * y : length of cycle
+ * k : the place where slow and fast pointer first met
+ * t : the time before first met
+ * Then we have
+ *    t = x + k + n*y
+ *   2t = x + k + m*y
+ * Which gives
+ *    x + k = (m-2n)*y
+ * Suppose slow(or fast) goes x more steps, and let another pointer goes x steps from head:
+ *    For slow : x + y -> (x+k)%y is 0 -> start of the cycle
+ *    For another pointer : x -> start of the cycle
+ * Running time: O(n), extra space O(1)
+ */
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode(int x) : val(x), next(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    ListNode *detectCycle(ListNode *head) {
+        ListNode* slow = head;
+        ListNode* fast = head;
+        ListNode* start = head;
+        while (fast!=NULL && fast->next!=NULL) {
+            slow = slow->next;
+            fast = fast->next->next;
+            if (slow==fast) {
+                while (slow!=start) {
+                    slow = slow->next;
+                    start = start->next;
+                }
+                return start;
+            }
+        }
+        return NULL;
+    }
+};
+
+
+
+/**
+ * Python solution based on pointer racing
+ */
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.next = None
+
+class Solution:
+    # @param head, a ListNode
+    # @return a list node
+    def detectCycle(self, head):
+        slow = head
+        fast = head
+        start = head
+        while ((fast is not None) and (fast.next is not None)) :
+            slow = slow.next
+            fast = fast.next.next
+            if (slow is fast):
+                while (slow is not start):
+                    slow = slow.next
+                    start = start.next
+                return start
+        return None
+		
+    
+
+		
+		
+
+/**
+ * Java solution based on pointer racing
+ */
+/**
+ * Definition for singly-linked list.
+ * class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) {
+ *         val = x;
+ *         next = null;
+ *     }
+ * }
+ */
+public class Solution {
+    public ListNode detectCycle(ListNode head) {
+        ListNode slow = head;
+        ListNode fast = head;
+        ListNode start = head;
+        while (fast!=null && fast.next!=null) {
+            slow = slow.next;
+            fast = fast.next.next;
+            if (slow == fast) {
+                while (slow != start) {
+                    slow = slow.next;
+                    start = start.next;
+                }
+                return start;
+            }
+        }
+        return null;
+    }
+}
